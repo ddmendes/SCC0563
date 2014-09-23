@@ -6,12 +6,12 @@
     </head>
     <body>
         <table>
-            <td><a href="home.html">Home</a></td>
+            <td><a href="home.jsp">Home</a></td>
         </table>
 
         <h1>Cadastro de Usuario<br>
 
-            <form action="login.html">
+            <form action="login.jsp">
                 <table>
                     <tr><td>Nome:</td>
                         <td><input type='text' name="nome_usuario" maxlength="35"></td>

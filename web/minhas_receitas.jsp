@@ -7,9 +7,9 @@
     <body>
         <table>
             <td>
-                <a href="home.html">Home</a>
-                <a href="cadastro_receitas.html">Cadastro de Receitas</a> 
-                <a href="login.html">Sair</a>
+                <a href="home.jsp">Home</a>
+                <a href="cadastro_receitas.jsp">Cadastro de Receitas</a> 
+                <a href="login.jsp">Sair</a>
             </td>
         </table style="border: 1px solid black; border-collapse: collapse">
         <h1>Receitas cadastradas:</h1>

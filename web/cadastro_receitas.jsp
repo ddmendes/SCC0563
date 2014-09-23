@@ -7,14 +7,14 @@
     <body>
         <table>
             <td>
-                <a href="home.html">Home</a>
-                <a href="minhas_receitas.html">Minhas Receitas</a> 
-                <a href="login.html">Sair</a>
+                <a href="home.jsp">Home</a>
+                <a href="minhas_receitas.jsp">Minhas Receitas</a> 
+                <a href="login.jsp">Sair</a>
             </td>
         </table>
 
         <br><h1>Nova Receita:</h1>
-        <form action="cadastro_receitas.html">
+        <form action="cadastro_receitas.jsp">
             <table>
                 <tr><td><b>*Nome:<input type="text" width:"48" heigth="48"></td></tr>
                 <tr><td>
@@ -51,7 +51,7 @@
                 <tr>
                     <td>
                         <input type="submit" value="Cadastrar">
-                        <a href="home.html">Cancelar</a>
+                        <a href="home.jsp">Cancelar</a>
                     </td>
                 </tr>	
             </table>

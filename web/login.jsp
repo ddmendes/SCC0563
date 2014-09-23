@@ -28,7 +28,7 @@
         </script>
 
         <h1>Receitas Online</h1><br>
-        <form id="form_login" action="home.html">
+        <form id="form_login" action="home.jsp">
             <table>
                 <tr>
                     <td>Login:</td>
@@ -39,7 +39,7 @@
                     <td><input type='password' id="usr_pwd" name="usr_pwd" ></td>
                 </tr>
                 <tr><td><input type='submit' value="Enviar" onclik="testeLogin();" ></td></tr>
-                <tr><td><a href="cadastro_usuario.html">Cadastro de usuario</a></td></tr>
+                <tr><td><a href="cadastro_usuario.jsp">Cadastro de usuario</a></td></tr>
             </table>
         </form>
         <div id="msg_erro"></div>
