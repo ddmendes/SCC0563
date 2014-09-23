@@ -13,12 +13,12 @@
 				var obj_msg_erro = document.getElementById('msg_erro');
 				var msg_erro = '';
 				
-				if(obj_login == '')
-					msg_erro = 'Campo e-mail vazio'
-				else if(obj_senha == '')
-					msg_erro = 'Campo senha vazio'
+				if(obj_login === '')
+					msg_erro = 'Campo e-mail vazio';
+				else if(obj_senha === '')
+					msg_erro = 'Campo senha vazio';
 				
-				if(msg_erro == '')
+				if(msg_erro === '')
 					obj_form.submit();
 				else
 					obj_msg_erro.innerHTML = msg_erro;
