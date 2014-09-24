@@ -14,13 +14,13 @@
             <form action="login.jsp">
                 <table>
                     <tr><td>Nome:</td>
-                        <td><input type='text' name="nome_usuario" maxlength="35"></td>
+                        <td><input type='text' name="nome_usuario" maxlength="35" pattern="[\w\s]+" title="Utilize somente letras e espaços, sem acentos." required /></td>
                     </tr>
                     <tr>
                         <td>Cidade:</td>
-                        <td><input type='text' name="cidade_usuario"></td>
+                        <td><input type='text' name="cidade_usuario" pattern="[\w\s]+" title="Utilize somente letras e espaços, sem acentos." required /></td>
                         <td>Estado:</td>
-                        <td><input list="estados" name="estado_usuario" size="2">
+                        <td><input list="estados" name="estado_usuario" size="2" required />
                             <datalist id="estados">
                                 <option value="AC">
                                 <option value="AL">
@@ -53,15 +53,17 @@
                         </td>
                     </tr>
                     <tr><td>Telefone:</td>
-                        <td><input type='tel' name="tel_usuario"></td>
+                        <td><input type='tel' name="tel_usuario" placeholder="(00)00000-0000" pattern="\(\d{2}\)\d{4,5}-\d{4}" title="Utilize o número no formato (00)00000-0000" required /></td>
                     </tr>
                     <tr>
                         <td>Login:</td>
-                        <td><input type='email' name="login_usuario" maxlength="35"></td>
+                        <td><input type='email' name="login_usuario" maxlength="35" required /></td>
                     </tr>	
                     <tr>
                         <td>Senha:</td>
-                        <td><input type='password' name="pwd_usuario" max="8"></td>
+                        <td><input type='password' name="pwd_usuario" max="8" pattern="[[A-Z]+|[a-z]+|[0-9]+[^A-Za-z0-9]+]+"
+                                   title="A senha deve conter pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e uma caracter especial (não alfanumérico)."
+                                   required/></td>
                     </tr>	
 
                     <tr><td><input type='submit' value='Cadastrar'></td></tr>
