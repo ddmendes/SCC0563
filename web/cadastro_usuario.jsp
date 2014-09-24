@@ -43,36 +43,36 @@
                         <td>Cidade:</td>
                         <td><input type='text' name="cidade_usuario" pattern="[\w\s]+" title="Utilize somente letras e espaços, sem acentos." required /></td>
                         <td>Estado:</td>
-                        <td><input list="estados" name="estado_usuario" size="2" required />
-                            <datalist id="estados">
-                                <option value="AC">
-                                <option value="AL">
-                                <option value="AP">
-                                <option value="AM">
-                                <option value="BA">
-                                <option value="CE">	
-                                <option value="DF">
-                                <option value="ES">
-                                <option value="GO">
-                                <option value="MA">
-                                <option value="MT">
-                                <option value="MS">
-                                <option value="MG">
-                                <option value="PA">
-                                <option value="PB">
-                                <option value="PR">
-                                <option value="PE">
-                                <option value="PI">
-                                <option value="RJ">
-                                <option value="RN">
-                                <option value="RS">
-                                <option value="RO">
-                                <option value="RR">
-                                <option value="SC">
-                                <option value="SP">
-                                <option value="SE">
-                                <option value="TO">
-                            </datalist>
+                        <td>
+                            <select name="estado">
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
                         </td>
                     </tr>
                     <tr><td>Telefone:</td>
@@ -99,7 +99,9 @@
                             <span id="chk_passwd_result"></span>
                         </td>
                     </tr>
-                    <tr><td><input type='button' onClick="checkSend();" value='Cadastrar'></td></tr>
+                    <tr>
+                        <td><input type='button' onClick="checkSend();" value='Cadastrar'></td>
+                    </tr>
                 </table>
             </form>
     </body>
