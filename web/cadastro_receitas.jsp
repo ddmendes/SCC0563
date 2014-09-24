@@ -29,12 +29,17 @@
                     </td>
                 </tr>
                 <tr><td><b>*Ingredientes:</td></tr>
-                <tr><td><input type="number" value="0" min="0" size="2"> Leite</td></tr>
-                <tr><td><input type="number" value="0" min="0" size="2"> Ovos</td></tr>
-                <tr><td><input type="number" value="0" min="0" size="2"> Farinha</td></tr>
-                <tr><td><input type="number" value="0" min="0" size="2"> Manteiga</td></tr>
-                <tr><td><input type="number" value="0" min="0" size="2"> Leite Condensado</td></tr>
-                <tr><td><input type="number" value="0" min="0" size="2"> Achocolatado</td></tr>
+                <tr>
+                    <th>Nome-Ingrediente</th>
+                    <th>Quantidade</th>
+                    <th>Unidade</th>
+                </tr>
+                <tr>
+                    <td><input type="text" width="100%"></td>
+                    <td><input type=""></td>
+                    <td><input type="text"></td>
+                    <td><input type="button" value="add more"></td>
+                </tr>
                 <tr><td><b>*Valor Nutricional:<input type="number" value="0" min="0" size="2"></td></tr>
                 <tr><td><b>Dicas:<input type="text" size="30"></td></tr>	
                 <tr><td><b>*Tempo de preparo: <input type="number" value="0" min="0" size="2"></b> minutos</td></tr>	
