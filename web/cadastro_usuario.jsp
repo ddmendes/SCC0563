@@ -3,6 +3,29 @@
 <html>
     <head>
         <title>Cadastro de usuario</title>
+        <script>
+            var passwdMatch = false;
+            function checkPassword() {
+                alert("checking!");
+                var passwd = document.getElementById("passwd").value;
+                var chkPasswd = document.getElementById("chk_passwd").value;
+                
+                if(passwd === chkPasswd) {
+                    passwdMatch = true;
+                    document.getElementById("chk_passwd_result").innerHTML = "Senha ok!";
+                } else {
+                    passwdMatch = false;
+                    document.getElementById("chk_passwd_result").innerHTML = "Senha e confirmação estão diferentes!";
+                }   
+            }
+            
+            function checkSend() {
+                var form = document.getElementById("form");
+                if(passwdMatch) {
+                    form.submit();
+                }
+            }
+        </script>
     </head>
     <body>
         <table>
@@ -11,7 +34,7 @@
 
         <h1>Cadastro de Usuario<br>
 
-            <form action="login.jsp">
+            <form action="login.jsp" id="form">
                 <table>
                     <tr><td>Nome:</td>
                         <td><input type='text' name="nome_usuario" maxlength="35" pattern="[\w\s]+" title="Utilize somente letras e espaços, sem acentos." required /></td>
@@ -61,12 +84,22 @@
                     </tr>	
                     <tr>
                         <td>Senha:</td>
-                        <td><input type='password' name="pwd_usuario" max="8" pattern="[[A-Z]+|[a-z]+|[0-9]+[^A-Za-z0-9]+]+"
+                        <td><input type='password' name="pwd_usuario" max="8" id="passwd"
+                                   pattern="^.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$"
                                    title="A senha deve conter pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e uma caracter especial (não alfanumérico)."
                                    required/></td>
                     </tr>	
-
-                    <tr><td><input type='submit' value='Cadastrar'></td></tr>
+                    <tr>
+                        <td>Confirma senha:</td>
+                        <td>
+                            <input type='password' name="chk_pwd_usuario" max="8" onChange="checkPassword();" id="chk_passwd"
+                                   pattern="^.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$"
+                                   title="A senha deve conter pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e uma caracter especial (não alfanumérico)."
+                                   required/>
+                            <span id="chk_passwd_result"></span>
+                        </td>
+                    </tr>
+                    <tr><td><input type='button' onClick="checkSend();" value='Cadastrar'></td></tr>
                 </table>
             </form>
     </body>
