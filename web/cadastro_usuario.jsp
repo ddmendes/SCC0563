@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>Cadastro de usuario</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css" />
         <script>
             var passwdMatch = false;
             function checkPassword() {

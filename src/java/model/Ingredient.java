@@ -12,13 +12,25 @@ package model;
  */
 public class Ingredient {
     
-    private String name;
-    private Double amount;
-    private String unit;
+    private final String name;
+    private final Double amount;
+    private final String unit;
     
     public Ingredient(String name, Double amount, String unit) {
         this.name = name;
         this.amount = amount;
         this.unit = unit;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public Double getAmount() {
+        return this.amount;
+    }
+    
+    public String getUnit() {
+        return this.unit;
     }
 }

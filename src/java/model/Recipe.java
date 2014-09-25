@@ -7,12 +7,15 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Davi Diório Mendes
  */
 public class Recipe {
+
+    
     
     private String name;
     private String category;
@@ -44,6 +47,22 @@ public class Recipe {
         return this.category;
     }
     
+    public List<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+    
+    public Integer getNutritionValue() {
+        return this.nutritionValue;
+    }
+    
+    public String getTips() {
+        return this.tips;
+    }
+    
+    public Integer getCookingTime() {
+        return this.cookingTime;
+    }
+    
     public Double getGrade() {
         return this.grade;
     }
@@ -61,6 +80,10 @@ public class Recipe {
         new OverRecipeDirector(recipes).construct(builder);
         
         return builder.getProduct();
+    }
+    
+    public static int getIdOf(Recipe r) {
+        return Recipe.recipes.indexOf(r);
     }
     
 }

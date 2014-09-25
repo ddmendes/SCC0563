@@ -33,7 +33,6 @@
             + " </ul>");
         
         mainSection = "<h3>Bem vindo, " + user.getName() + "!</h3>";
-        mainSection = mainSection.concat(Recipe.getCategoryNameGradeTableView());
         
     } else {
         navSection = ""
@@ -44,12 +43,13 @@
         mainSection = "Faça login para continuar";
     }
     
+    mainSection = mainSection.concat(Recipe.getCategoryNameGradeTableView());
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Login</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
         <header>

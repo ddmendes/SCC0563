@@ -22,7 +22,7 @@ public class TableViewRecipe implements OverRecipeBuilder {
     @Override
     public void buildPart(Recipe r) {
         if(r.isAvailable()) {
-            sb.append("<tr><td>" + r.getCategory() + "</td><td>" + r.getName() + "</td><td>" + r.getGrade() + "</td></tr>");
+            sb.append("<tr><td>" + r.getCategory() + "</td><td><a href='detalhe_receita.jsp?recipe_id=" + Recipe.getIdOf(r) + "'>" + r.getName() + "</a></td><td>" + r.getGrade() + "</td></tr>");
         }
     }
 

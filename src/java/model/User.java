@@ -70,4 +70,10 @@ public class User {
         return this.recipes.add(r);
     }
     
+    public String getMyRecipesTableView() {
+        TableViewRecipe builder = new TableViewRecipe();
+        new OverRecipeDirector(recipes).construct(builder);
+        return builder.getProduct();
+    }
+    
 }
