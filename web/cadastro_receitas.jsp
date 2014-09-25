@@ -3,63 +3,86 @@
 <html>
     <head>
         <title>Cadastro de receitas</title>
+        <link rel="stylesheet" href="style.css">
+        <script>
+            var i = 2;
+            function addMoreIngr() {
+                var list = document.getElementById("ingr_list");
+                
+                list.innerHTML += "<div class='input-line'><input type='text' placeholder='Ingrediente' name='ingr_name"+i+"' class='ing-name' /><input type='number' placeholder='0' name='ingr_qnt"+i+"' class='ing-qnt' /><select name='ingr_unt"+i+"' class='ing-unt'><option value='Colher'>Colher(es)</option><option value='Xícara'>Xícara(s)</option><option value='Gramas'>Gramas</option><option value='Unidade'>Unidade(s)</option></select></div>";
+                i++;
+            }
+        </script>
     </head>
     <body>
-        <table>
-            <td>
-                <a href="index.jsp">Home</a>
-                <a href="minhas_receitas.jsp">Minhas Receitas</a> 
-                <a href="login.jsp">Sair</a>
-            </td>
-        </table>
+        <nav>
+            <ul>
+                <li><a href="index.jsp">Home</a></li>
+                <li><a href="minhas_receitas.jsp">Minhas Receitas</a></li>
+                <li><a href="login.jsp">Sair</a></li>
+            </ul>
+        </nav>
 
-        <br><h1>Nova Receita:</h1>
-        <form action="cadastro_receitas.jsp">
-            <table>
-                <tr><td><b>*Nome:<input type="text" width:"48" heigth="48"></td></tr>
-                <tr><td>
-                        <b>*Categoria:
-                            <input list="ctg_receitas" name="categoria_receita" size="8">
-                            <datalist id="ctg_receitas">
-                                <option value="Doce">
-                                <option value="Salgado">
-                                <option value="Aperitivos">
-                                <option value="Bebidas">
-                            </datalist>
-                    </td>
-                </tr>
-                <tr><td><b>*Ingredientes:</td></tr>
-                <tr>
-                    <th>Nome-Ingrediente</th>
-                    <th>Quantidade</th>
-                    <th>Unidade</th>
-                </tr>
-                <tr>
-                    <td><input type="text" width="100%"></td>
-                    <td><input type=""></td>
-                    <td><input type="text"></td>
-                    <td><input type="button" value="add more"></td>
-                </tr>
-                <tr><td><b>*Valor Nutricional:<input type="number" value="0" min="0" size="2"></td></tr>
-                <tr><td><b>Dicas:<input type="text" size="30"></td></tr>	
-                <tr><td><b>*Tempo de preparo: <input type="number" value="0" min="0" size="2"></b> minutos</td></tr>	
-                <tr><td><b>Media de notas: <input type="number" value="0" min="0" size="2"></td></tr>
-                <tr>
-                    <td><b>Status:
-                            <input list="status" name="status_receita" size="8">
-                            <datalist id="status">
-                                <option value="Disponivel">
-                                <option value="Indisponivel">
-                            </datalist>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" value="Cadastrar">
-                        <a href="index.jsp">Cancelar</a>
-                    </td>
-                </tr>	
-            </table>
-        </form>		
+        <div class="page-content">
+            <h1>Nova Receita:</h1>
+            <form action="cadastro_receitas.jsp">
+                <div class="input-group">
+                    <div class='input-line'>
+                        <label for="recipe_name">Nome:</label>
+                        <input type="text" name="recipe_name" />
+                    </div>
+                    <div class="input-line">
+                        <label for="recipe_category">Categoria:</label>
+                        <select name="recipe_category">
+                            <option value="Doce">Doce</option>
+                            <option value="Salgado">Salgado</option>
+                            <option value="Aperitivos">Aperitivos</option>
+                            <option value="Bebidas">Bebidas</option>
+                        </select>
+                    </div>
+                </div>
+                <h2>*Ingredientes:</h2>
+                <div class="input-list">
+                    <div id="ingr_list">
+                        <div class="input-line">
+                            <input type="text" placeholder="Ingrediente" name="ingr_name1" class="ing-name" />
+                            <input type="number" placeholder="0" name="ingr_qnt1" class="ing-qnt" />
+                            <select name="ingr_unt1" class="ing-unt">
+                                <option value="Colher">Colher(es)</option>
+                                <option value="Xícara">Xícara(s)</option>
+                                <option value="Gramas">Gramas</option>
+                                <option value="Unidade">Unidade(s)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <input type="button" value="add more" onClick="addMoreIngr();">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <div class="input-line">
+                        <label for="nutritional-value">Valor nutricional:</label>
+                        <input type="number" pattern="\d+" title="Utilize somente números inteiros." name="nutritional-value" />
+                    </div>
+                    <div class="input-line">
+                        <label for="tips">Dicas:</label>
+                        <textarea name="tips"></textarea>
+                    </div>
+                    <div class="input-line">
+                        <label for="cook-time">Tempo de preparo(min):</label>
+                        <input type="number" pattern="\d+" title="Utilize somente números inteiros." name="nutritional-value" />
+                    </div>
+                    <div class="input-line">
+                        <label for="grade">Nota:</label>
+                        <progress max="5" value="0">0</progress>
+                    </div>
+                    <div class="input-line">
+                        <label for="available">Disponível:</label>
+                        <input type="checkbox" name="available" checked/>
+                    </div>
+                </div>
+            </form>	
+        </div>
     </body>
 </html>
