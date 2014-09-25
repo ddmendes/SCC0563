@@ -1,49 +1,57 @@
+
+<%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    String msg = "";
+    if(request.getParameter("login") != null) {
+        if(User.checkAvailableLogin(request.getParameter("login"))) {
+            new User(
+                request.getParameter("name").toUpperCase(), 
+                request.getParameter("city").toUpperCase(),
+                request.getParameter("state"),
+                request.getParameter("phone"),
+                request.getParameter("login"),
+                request.getParameter("passwd"));
+            msg = "document.onLoad = new function() { alert(\"Cadastro realizado com sucesso!\"); }";
+        } else {
+            msg = "document.onLoad = new function() { alert(\"Login inválido.\\nEscolha outro.\"); }";
+        }
+    }
+%>
 <html>
     <head>
         <title>Login</title>
+        <link rel="stylesheet" href="style.css">
+        <script><%=msg%></script>
     </head>
     <body>		
-        <head>
-            <script language="JavaScript">
-                function testeLogin() {
-                    alert("testeLogin");
-                    var obj_form = document.getElementById('form_login');
-                    var obj_login = document.getElementById('usr_email').value;
-                    var obj_senha = document.getElementById('usr_pwd').value;
-                    var obj_msg_erro = document.getElementById('msg_erro');
-                    var msg_erro = '';
-
-                    if (obj_login == '')
-                        msg_erro = 'Campo e-mail vazio'
-                    else if (obj_senha == '')
-                        msg_erro = 'Campo senha vazio'
-
-                    if (msg_erro == '')
-                        obj_form.submit();
-                    else
-                        obj_msg_erro.innerHTML = msg_erro;
-                }
-
-            </script>
-        </head>
-
-        <h1>Receitas Online</h1><br>
-        <form id="form_login" action="index.jsp">
-            <table>
-                <tr>
-                    <td>Login:</td>
-                    <td><input type='email' id="usr_email" name="usr_email" maxlength="35"></td>
-                </tr>
-                <tr>
-                    <td>Senha:</td>
-                    <td><input type='password' id="usr_pwd" name="usr_pwd" ></td>
-                </tr>
-                <tr><td><input type='button' value="Enviar" onclick="testeLogin();" ></td></tr>
-                <tr><td><a href="cadastro_usuario.jsp">Cadastro de usuario</a></td></tr>
-            </table>
-        </form>
-        <div id="msg_erro"></div>
+        <header>
+            <h1>Recipes 563</h1>
+            <h2>Página de Login</h2>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.jsp">Home</a></li>
+                <li><a href="cadastro_usuario.jsp">Cadastro de Usuários</a></li>
+            </ul>
+        </nav>
+        <div class="page-content">
+            <form action="index.jsp">
+                <div class="input-group">
+                    <div class="input-line">
+                        <label for="login">Login:</label>
+                        <input type='email' name="login" required />
+                    </div>
+                    <div class="input-line">
+                        <label for="passwd">Senha:</label>
+                        <input type="password" name="passwd" required />
+                    </div>
+                    <div class="input-line">
+                        <input type="submit" value="Enviar" />
+                    </div>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

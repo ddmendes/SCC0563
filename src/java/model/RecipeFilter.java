@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package Model;
+package model;
 
 /**
  *
  * @author Davi Diório Mendes
  */
-public class User {
+public class RecipeFilter {
 
 }

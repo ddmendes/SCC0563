@@ -52,7 +52,7 @@ div.input-list div.input-line * {
 }
 
 div.input-line option {
-    display: block;
+    display: list-item;
 }
 
 div.input-line .ing-name {
@@ -69,4 +69,19 @@ div.input-line .ing-unt {
 
 datalist {
     display: none;
+}
+
+table {
+    margin: 1em;
+    border: 1px solid white;
+    background-color: white;
+}
+
+table tr:nth-child(2n+1) {
+    background-color: #f0f0f0;
+}
+
+table tr * {
+    padding: 0.5em 1em;
+    border: 1px solid white;
 }

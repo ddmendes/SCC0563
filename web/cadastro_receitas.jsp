@@ -1,5 +1,37 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Ingredient" %>
+<%@page import="model.Recipe" %>
+<%@page import="model.User" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    Recipe rec;
+    User user = (User) session.getAttribute("user");
+    String msg = "";
+    
+    if(user != null && request.getParameter("recipe_name") != null) {
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        
+        int i = 1;
+        do {
+            ingredients.add(new Ingredient(request.getParameter("ingr_name" + i), 
+                                            new Double(request.getParameter("ingr_amnt" + i)),
+                                            request.getParameter("ingr_unt" + i)));
+            
+        } while(request.getParameter("ingr_name" + ++i) != null && !request.getParameter("ingr_name" + 1).equals(""));
+        
+        rec = new Recipe(request.getParameter("recipe_name"),
+                            request.getParameter("recipe_category"),
+                            ingredients,
+                            new Integer(request.getParameter("nutritional_value")),
+                            request.getParameter("tips"),
+                            new Integer(request.getParameter("cooking_time")),
+                            request.getParameter("available").equals("true"));
+        
+        user.addRecipe(rec);
+        msg = "document.onLoad = new function() {alert(\"Receita inserida com sucesso!\")}";
+    }
+%>
 <html>
     <head>
         <title>Cadastro de receitas</title>
@@ -9,12 +41,17 @@
             function addMoreIngr() {
                 var list = document.getElementById("ingr_list");
                 
-                list.innerHTML += "<div class='input-line'><input type='text' placeholder='Ingrediente' name='ingr_name"+i+"' class='ing-name' /><input type='number' placeholder='0' name='ingr_qnt"+i+"' class='ing-qnt' /><select name='ingr_unt"+i+"' class='ing-unt'><option value='Colher'>Colher(es)</option><option value='Xícara'>Xícara(s)</option><option value='Gramas'>Gramas</option><option value='Unidade'>Unidade(s)</option></select></div>";
+                list.innerHTML += "<div class='input-line'><input type='text' placeholder='Ingrediente' name='ingr_name"+i+"' class='ing-name' /><input type='number' step='any' placeholder='0' name='ingr_amnt"+i+"' class='ing-amnt' /><select name='ingr_unt"+i+"' class='ing-unt'><option value='Colher'>Colher(es)</option><option value='Xícara'>Xícara(s)</option><option value='Gramas'>Gramas</option><option value='Unidade'>Unidade(s)</option></select></div>";
                 i++;
             }
+            <%=msg%>
         </script>
     </head>
     <body>
+        <header>
+            <h1>Recipes 563</h1>
+            <h2>Nova Receita:</h2>
+        </header>
         <nav>
             <ul>
                 <li><a href="index.jsp">Home</a></li>
@@ -22,9 +59,7 @@
                 <li><a href="login.jsp">Sair</a></li>
             </ul>
         </nav>
-
         <div class="page-content">
-            <h1>Nova Receita:</h1>
             <form action="cadastro_receitas.jsp">
                 <div class="input-group">
                     <div class='input-line'>
@@ -41,19 +76,19 @@
                         </select>
                     </div>
                 </div>
-                <h2>*Ingredientes:</h2>
+                <h3>Ingredientes:</h3>
                 <div class="input-list">
+                    <div class="input-line">
+                        <input type="text" placeholder="Ingrediente" name="ingr_name1" class="ing-name" />
+                        <input type="number" step="any" placeholder="0" name="ingr_amnt1" class="ing-qnt" />
+                        <select name="ingr_unt1" class="ing-unt">
+                            <option value="Colher">Colher(es)</option>
+                            <option value="Xícara">Xícara(s)</option>
+                            <option value="Gramas">Gramas</option>
+                            <option value="Unidade">Unidade(s)</option>
+                        </select>
+                    </div>
                     <div id="ingr_list">
-                        <div class="input-line">
-                            <input type="text" placeholder="Ingrediente" name="ingr_name1" class="ing-name" />
-                            <input type="number" placeholder="0" name="ingr_qnt1" class="ing-qnt" />
-                            <select name="ingr_unt1" class="ing-unt">
-                                <option value="Colher">Colher(es)</option>
-                                <option value="Xícara">Xícara(s)</option>
-                                <option value="Gramas">Gramas</option>
-                                <option value="Unidade">Unidade(s)</option>
-                            </select>
-                        </div>
                     </div>
                     <div class="input-line">
                         <input type="button" value="add more" onClick="addMoreIngr();">
@@ -62,25 +97,28 @@
                 
                 <div class="input-group">
                     <div class="input-line">
-                        <label for="nutritional-value">Valor nutricional:</label>
-                        <input type="number" pattern="\d+" title="Utilize somente números inteiros." name="nutritional-value" />
+                        <label for="nutritional_value">Valor nutricional:</label>
+                        <input type="number" name="nutritional_value" />
                     </div>
                     <div class="input-line">
                         <label for="tips">Dicas:</label>
                         <textarea name="tips"></textarea>
                     </div>
                     <div class="input-line">
-                        <label for="cook-time">Tempo de preparo(min):</label>
-                        <input type="number" pattern="\d+" title="Utilize somente números inteiros." name="nutritional-value" />
+                        <label for="cooking_time">Tempo de preparo(min):</label>
+                        <input type="number" name="cooking_time" />
                     </div>
                     <div class="input-line">
-                        <label for="grade">Nota:</label>
+                        <label>Nota:</label>
                         <progress max="5" value="0">0</progress>
                     </div>
                     <div class="input-line">
                         <label for="available">Disponível:</label>
-                        <input type="checkbox" name="available" checked/>
+                        <input type="checkbox" name="available" value="true" checked/>
                     </div>
+                </div>
+                <div>
+                    <input type="submit" value="Enviar" />
                 </div>
             </form>	
         </div>
