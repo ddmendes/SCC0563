@@ -44,15 +44,15 @@
             <form action="login.jsp" id="form">
                 <div class="input-group">
                     <div class="input-line">
-                        <label for="name">Nome:</label>
+                        <label>Nome:</label>
                         <input type='text' name="name" maxlength="35" pattern="[\w\s]+" title="Utilize somente letras e espaços, sem acentos." required />
                     </div>
                     <div class="input-line">
-                        <label for="city">Cidade:</label>
+                        <label>Cidade:</label>
                         <input type='text' name="city" pattern="[\w\s]+" title="Utilize somente letras e espaços, sem acentos." required />
                     </div>
                     <div class="input-line">
-                        <label for="state">Estado:</label>
+                        <label>Estado:</label>
                         <select name="state">
                             <option value="AC">AC</option>
                             <option value="AL">AL</option>
@@ -84,22 +84,22 @@
                         </select>
                     </div>
                     <div class="input-line">
-                        <label for="phone">Telefone:</label>
+                        <label>Telefone:</label>
                         <input type='tel' name="phone" placeholder="(00)00000-0000" pattern="\(\d{2}\)\d{4,5}-\d{4}" title="Utilize o número no formato (00)00000-0000" required />
                     </div>
                     <div class="input-line">
-                        <label for="login">Login:</label>
+                        <label>Login:</label>
                         <input type='email' name="login" maxlength="35" required />
                     </div>
                     <div class="input-line">
-                        <label for="passwd">Senha:</label>
+                        <label>Senha:</label>
                         <input type='password' name="pwd_usuario" maxlength="8" id="passwd"
                                    pattern="^.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$"
                                    title="A senha deve conter pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e uma caracter especial (não alfanumérico)."
                                    required/>
                     </div>
                     <div class="input-line">
-                        <label for="chk_passwd">Confirmar senha:</label>
+                        <label>Confirmar senha:</label>
                         <input type='password' name="chk_pwd_usuario" maxlength="8" onChange="checkPassword();" id="chk_passwd"
                                    pattern="^.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$"
                                    title="A senha deve conter pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e uma caracter especial (não alfanumérico)."
