@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20/09/2014, 09:04:02
+    Author     : DaviDiório
+*/
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: block;
+}
+
+div.input-group {
+    display: table;
+    margin: 1em;
+    vertical-align: text-top;
+}
+
+div.input-group div.input-line {
+    display: table-row;
+    text-align: left;
+}
+
+div.input-group div.input-line * {
+    display: table-cell;
+    margin: 0.5em;
+}
+
+textarea {
+    width: 30em;
+    height: 10em;
+}
+
+div.input-list {
+    margin: 1em;
+}
+
+div.input-list div.input-line {
+    display: list-item;
+    margin-bottom: 0.3em;
+}
+
+div.input-list div.input-line * {
+    display: inline;
+    margin-right: 0.2em;
+}
+
+div.input-line option {
+    display: block;
+}
+
+div.input-line .ing-name {
+    width: 25em;
+}
+
+input.ing-qnt {
+    width: 4em;
+}
+
+div.input-line .ing-unt {
+    width: 7em;
+}
+
+datalist {
+    display: none;
+}
