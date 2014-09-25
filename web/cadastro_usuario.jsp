@@ -29,7 +29,7 @@
     </head>
     <body>
         <table>
-            <td><a href="home.jsp">Home</a></td>
+            <td><a href="index.jsp">Home</a></td>
         </table>
 
         <h1>Cadastro de Usuario<br>

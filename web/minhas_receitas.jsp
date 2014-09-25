@@ -7,7 +7,7 @@
     <body>
         <table>
             <td>
-                <a href="home.jsp">Home</a>
+                <a href="index.jsp">Home</a>
                 <a href="cadastro_receitas.jsp">Cadastro de Receitas</a> 
                 <a href="login.jsp">Sair</a>
             </td>

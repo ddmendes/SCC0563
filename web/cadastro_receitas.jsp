@@ -7,7 +7,7 @@
     <body>
         <table>
             <td>
-                <a href="home.jsp">Home</a>
+                <a href="index.jsp">Home</a>
                 <a href="minhas_receitas.jsp">Minhas Receitas</a> 
                 <a href="login.jsp">Sair</a>
             </td>
@@ -56,7 +56,7 @@
                 <tr>
                     <td>
                         <input type="submit" value="Cadastrar">
-                        <a href="home.jsp">Cancelar</a>
+                        <a href="index.jsp">Cancelar</a>
                     </td>
                 </tr>	
             </table>
