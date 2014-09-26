@@ -7,6 +7,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,7 +25,9 @@ public class Recipe {
     private String tips;
     private Integer cookingTime;
     private Double grade;
+    private Integer rateAmount;
     private boolean available;
+    private final HashMap<User, String> comments;
     private static final ArrayList<Recipe> recipes = new ArrayList<Recipe>();
     
     public Recipe(String name, String category, ArrayList<Ingredient> ingredients, Integer nutritionValue, String tips, Integer cookingTime, boolean available) {
@@ -35,7 +38,9 @@ public class Recipe {
         this.tips = tips;
         this.cookingTime = cookingTime;
         this.grade = new Double(0.0);
+        this.rateAmount = new Integer(0);
         this.available = available;
+        this.comments = new HashMap<User, String>();
         Recipe.recipes.add(this);
     }
     
@@ -67,8 +72,21 @@ public class Recipe {
         return this.grade;
     }
     
-    boolean isAvailable() {
+    public boolean isAvailable() {
         return this.available;
+    }
+    
+    public void addRate(Integer r) {
+        this.grade = (rateAmount * grade + r.doubleValue()) / (rateAmount + 1);
+        this.rateAmount++;
+    }
+    
+    public void addComment(User u, String comment) {
+        this.comments.put(u, comment);
+    }
+    
+    public HashMap<User, String> getComments() {
+        return this.comments;
     }
     
     public static Recipe getRecibeById(int id) {

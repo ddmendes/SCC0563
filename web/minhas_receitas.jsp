@@ -4,6 +4,7 @@
 <%
     User user = (User) session.getAttribute("user");
     String usrRecipesTable = user.getMyRecipesTableView();
+    String ratedRecipes = user.getRecipesILikeOverThreeTableView();
 %>
 <html>
     <head>
@@ -32,6 +33,9 @@
             <div>
                 <div>
                     <h3>Que você curtiu</h3>
+                </div>
+                <div>
+                    <%=ratedRecipes%>
                 </div>
             </div>
         </div>

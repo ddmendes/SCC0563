@@ -8,6 +8,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -20,6 +21,8 @@ public class User {
     private String phone;
     private String login;
     private String passwd;
+    private final HashMap<Recipe, Integer> ratings;
+    private final HashMap<Recipe, String> comments;
     private final ArrayList<Recipe> recipes;
     private final static HashMap<String, User> users = new HashMap<String, User>();
     
@@ -31,6 +34,8 @@ public class User {
         this.login  = login;
         this.passwd = passwd;
         this.recipes = new ArrayList<Recipe>();
+        this.ratings = new HashMap<Recipe, Integer>();
+        this.comments = new HashMap<Recipe, String>();
         User.users.put(this.login, this);
     }
     
@@ -74,6 +79,24 @@ public class User {
         TableViewRecipe builder = new TableViewRecipe();
         new OverRecipeDirector(recipes).construct(builder);
         return builder.getProduct();
+    }
+    
+    public String getRecipesILikeOverThreeTableView() {
+        OverRecipeBuilder builder = new TableViewRecipeRateFiltered(new Double(3.0), this);
+        new OverRecipeDirector((List) this.ratings.keySet()).construct(builder);
+        return builder.getProduct();
+    }
+    
+    public void addComment(Recipe r, String comment) {
+        this.comments.put(r, comment);
+    }
+    
+    public void addRating(Recipe r, Integer rate) {
+        this.ratings.put(r, rate);
+    }
+    
+    public HashMap<Recipe, Integer> getRatings() {
+        return this.ratings;
     }
     
 }
