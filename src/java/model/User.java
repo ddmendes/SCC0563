@@ -8,7 +8,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  *
@@ -43,20 +42,49 @@ public class User {
         return this.name;
     }
     
+    public void setName(String name){
+        this.name = name;
+    }
+    
     public String getCity() {
         return this.city;
+    }
+    
+    public void setCity(String city){
+        this.city = city;
     }
     
     public String getState() {
         return this.state;
     }
     
+    public void setState(String state){
+        this.state = state;
+    }
+    
     public String getPhone() {
         return this.phone;
     }
     
+    public void setPhone(String phone){
+        this.phone = phone;
+    }
+    
     public String getLogin() {
         return this.login;
+    }
+    
+    public void setLogin(String login){
+        users.remove(this.login);
+        this.login = login;
+        users.put(login, this);
+        
+    }
+    
+    public void setPasswd(String actPasswd, String newPasswd) {
+        if(checkPasswd(actPasswd)) {
+            this.passwd = newPasswd;
+        }
     }
     
     public boolean checkPasswd(String passwd) {
@@ -99,4 +127,31 @@ public class User {
         return this.ratings;
     }
     
+    public static String getUserTableView() {
+        OverUserBuilder builder = new TableViewUser();
+        new OverUserDirector(new ArrayList<User>(users.values())).construct(builder);
+        return builder.getProduct();
+    }
+    
+    public static void remove(String login) {
+        User u = users.get(login);
+        if(u != null) {
+            //remove comments
+            for(Recipe r : u.comments.keySet()) {
+                r.removeComment(u);
+            }
+            for(Recipe r : u.recipes) {
+                r.remove();
+            }
+            users.remove(login);
+        }
+    }
+    
+    public static void unlinkRecipe(Recipe r) {
+        for(User u : users.values()) {
+            u.recipes.remove(r);
+            u.ratings.remove(r);
+            u.comments.remove(r);
+        }
+    }
 }

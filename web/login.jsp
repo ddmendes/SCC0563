@@ -4,16 +4,26 @@
 <!DOCTYPE html>
 <%
     String msg = "";
-    if(request.getParameter("login") != null) {
-        if(User.checkAvailableLogin(request.getParameter("login"))) {
+    User u = (User) session.getAttribute("user");
+    String login = request.getParameter("login");
+    if(login != null) {
+        if(request.getParameter("edt_user").equals("") && User.checkAvailableLogin(login) && request.getParameter("pwd_usuario").equals(request.getParameter("chk_pwd_usuario"))) {
             new User(
                 request.getParameter("name").toUpperCase(), 
                 request.getParameter("city").toUpperCase(),
                 request.getParameter("state"),
                 request.getParameter("phone"),
-                request.getParameter("login"),
-                request.getParameter("passwd"));
+                login,
+                request.getParameter("pwd_usuario"));
             msg = "document.onLoad = new function() { alert(\"Cadastro realizado com sucesso!\"); }";
+        } else if(u != null && u.getLogin().equals(request.getParameter("edt_user"))) {
+            u.setName(request.getParameter("name"));
+            u.setCity(request.getParameter("city"));
+            u.setState(request.getParameter("state"));
+            u.setPhone(request.getParameter("phone"));
+            u.setLogin(login);
+            u.setPasswd(request.getParameter("actual_passwd"), request.getParameter("pwd_usuario"));
+            msg = "document.onLoad = new function() { alert(\"Usuário editado com sucesso!\"); }";
         } else {
             msg = "document.onLoad = new function() { alert(\"Login inválido.\\nEscolha outro.\"); }";
         }
@@ -40,11 +50,11 @@
             <form action="index.jsp">
                 <div class="input-group">
                     <div class="input-line">
-                        <label for="login">Login:</label>
+                        <label>Login:</label>
                         <input type='email' name="login" required />
                     </div>
                     <div class="input-line">
-                        <label for="passwd">Senha:</label>
+                        <label>Senha:</label>
                         <input type="password" name="passwd" required />
                     </div>
                     <div class="input-line">

@@ -12,10 +12,11 @@
     
     User user = (User) session.getAttribute("user");
     User login = User.getUser(request.getParameter("login"));
+    out.println(login);
     String navSection = null;
     String mainSection = null;
     
-    if(user != null || login != null) {
+    if(user != null || (login != null && login.checkPasswd(request.getParameter("passwd")) )) {
         if(user == null) {
             user = login;
             session.setAttribute("user", login);
@@ -23,10 +24,10 @@
         
         navSection = "<ul>";
         if(user.getName().equals("Administrador")) {
-            navSection = navSection.concat("<li><a href='management.jsp'>Gerenciamento</a></li>");
+            navSection = navSection.concat("<li><a href='gerenciamento.jsp'>Gerenciamento</a></li>");
         }
         navSection = navSection.concat(""
-            + "     <li><a href='cadastro_usuario.jsp?login="+user.getLogin()+"'>Editar perfil</a></li>"
+            + "     <li><a href='cadastro_usuario.jsp?edit_user="+user.getLogin()+"'>Editar perfil</a></li>"
             + "     <li><a href='minhas_receitas.jsp'>Minhas Receitas</a></li>"
             + "     <li><a href='cadastro_receitas.jsp'>Cadastro de Receitas</a></li>"
             + "     <li><a href='index.jsp?logout=true'>Sair</a></li>"

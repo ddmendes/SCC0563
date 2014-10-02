@@ -85,8 +85,17 @@ public class Recipe {
         this.comments.put(u, comment);
     }
     
+    public void removeComment(User u) {
+        this.comments.remove(u);
+    }
+    
     public HashMap<User, String> getComments() {
         return this.comments;
+    }
+    
+    public void remove() {
+        User.unlinkRecipe(this);
+        Recipe.recipes.remove(this);
     }
     
     public static Recipe getRecibeById(int id) {
@@ -102,6 +111,12 @@ public class Recipe {
     
     public static int getIdOf(Recipe r) {
         return Recipe.recipes.indexOf(r);
+    }
+    
+    public static String getManagementTableView() {
+        OverRecipeBuilder builder = new TableManagementViewRecipe();
+        new OverRecipeDirector(recipes).construct(builder);
+        return builder.getProduct();
     }
     
 }
