@@ -16,6 +16,7 @@
     String login = "<li><a href='login.jsp'>Login</a></li>";
     
     String recipeId = request.getParameter("recipe_id");
+    
     if(recipeId != null) {
         Recipe r = Recipe.getRecibeById(Integer.parseInt(recipeId));
         
@@ -98,7 +99,7 @@
             </ul>
             <div>
                 <form action="detalhe_receita.jsp">
-                    <input type="hidden" name="recipe_id" value="${recipeId}" />
+                    <input type="hidden" name="recipe_id" value="<%=recipeId%>" />
                     <label>Comentário:</label><br />
                     <textarea name="comment" required></textarea><br />
                     <input type="submit" value="Enviar" />
@@ -106,7 +107,7 @@
             </div>
             <div>
                 <form action="detalhe_receita.jsp">
-                    <input type="hidden" name="recipe_id" value="${recipeId}" />
+                    <input type="hidden" name="recipe_id" value="<%=recipeId%>" />
                     <label>De sua nota:</label>
                     <input type="radio" name="rate" value="0" />0
                     <input type="radio" name="rate" value="1" />1

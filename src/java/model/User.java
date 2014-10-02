@@ -76,14 +76,14 @@ public class User {
     }
     
     public String getMyRecipesTableView() {
-        TableViewRecipe builder = new TableViewRecipe();
+        OverRecipeBuilder builder = new TableViewRecipe();
         new OverRecipeDirector(recipes).construct(builder);
         return builder.getProduct();
     }
     
     public String getRecipesILikeOverThreeTableView() {
         OverRecipeBuilder builder = new TableViewRecipeRateFiltered(new Double(3.0), this);
-        new OverRecipeDirector((List) this.ratings.keySet()).construct(builder);
+        new OverRecipeDirector(new ArrayList(this.ratings.keySet())).construct(builder);
         return builder.getProduct();
     }
     

@@ -27,8 +27,9 @@ public class TableViewRecipeRateFiltered implements OverRecipeBuilder {
 
     @Override
     public void buildPart(Recipe r) {
-        if(rates.get(r) > floor) {
-            this.sb.append("<tr><td>" + r.getCategory() + "</td><td>" + r.getName() + "</td><td>" + r.getGrade() + "</td></tr>");
+        Integer rate = rates.get(r);
+        if(rate > floor) {
+            this.sb.append("<tr><td>" + r.getCategory() + "</td><td>" + r.getName() + "</td><td>" + rate + "</td></tr>");
         }
     }
 
