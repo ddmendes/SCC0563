@@ -6,8 +6,12 @@
 
 package servlet;
 
+import beans.Ingredient;
+import beans.Recipe;
+import beans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,21 +36,39 @@ public class RecipeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RecipeController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RecipeController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
+            User u = (User) request.getSession(false).getAttribute("user");
+            ArrayList<Ingredient> ingList = null;
+            Recipe rec = null;
+            
+            if(u != null && request.getParameter("recipe_name") != null) {
+                ingList = new ArrayList<Ingredient>();
+                
+                int i = 1;
+                do {
+                    ingList.add(new Ingredient(request.getParameter("ingr_name" + i), 
+                                                    new Double(request.getParameter("ingr_amnt" + i)),
+                                                    request.getParameter("ingr_unt" + i)));
+
+                } while(request.getParameter("ingr_name" + ++i) != null && !request.getParameter("ingr_name" + 1).equals(""));
+                
+                rec = new Recipe(request.getParameter("recipe_name"),
+                                request.getParameter("recipe_category"),
+                                ingList,
+                                new Integer(request.getParameter("nutritional_value")),
+                                request.getParameter("tips"),
+                                new Integer(request.getParameter("cooking_time")),
+                                request.getParameter("available").equals("true"));  
+        
+                u.addRecipe(rec);
+                
+                request.setAttribute("recipe_insertion", "ok");
+            }
+            
+            request.getRequestDispatcher("cadastro_receitas.jsp").forward(request, response);
+        } catch(NullPointerException ex) {
+            request.setAttribute("trying_access", "ok");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

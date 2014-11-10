@@ -15,9 +15,7 @@ import java.util.List;
  *
  * @author Davi Diório Mendes
  */
-public class Recipe implements Serializable{
-
-    
+public class Recipe implements Serializable {
     
     private String name;
     private String category;
@@ -28,8 +26,10 @@ public class Recipe implements Serializable{
     private Double grade;
     private Integer rateAmount;
     private boolean available;
-    private final HashMap<User, String> comments;
+    private HashMap<User, String> comments;
     private static final ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+    
+    public Recipe() {}
     
     public Recipe(String name, String category, ArrayList<Ingredient> ingredients, Integer nutritionValue, String tips, Integer cookingTime, boolean available) {
         this.name = name;
@@ -118,6 +118,10 @@ public class Recipe implements Serializable{
         OverRecipeBuilder builder = new TableManagementViewRecipe();
         new OverRecipeDirector(recipes).construct(builder);
         return builder.getProduct();
+    }
+    
+    public static List<Recipe> getRecipeList() {
+        return (List<Recipe>) recipes.clone();
     }
     
 }

@@ -1,51 +1,6 @@
-<%@page import="model.Recipe"%>
-<%@page import="model.User"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    if(User.checkAvailableLogin("adm@receitas.com")) {
-        new User("Administrador", "São Carlos", "SP", "(19)3333-3333", "adm@receitas.com", "12345@Fc");
-    }
-    
-    if(request.getParameter("logout") != null) {
-        session.removeAttribute("user");
-    }
-    
-    User user = (User) session.getAttribute("user");
-    User login = User.getUser(request.getParameter("login"));
-    out.println(login);
-    String navSection = null;
-    String mainSection = null;
-    
-    if(user != null || (login != null && login.checkPasswd(request.getParameter("passwd")) )) {
-        if(user == null) {
-            user = login;
-            session.setAttribute("user", login);
-        }
-        
-        navSection = "<ul>";
-        if(user.getName().equals("Administrador")) {
-            navSection = navSection.concat("<li><a href='gerenciamento.jsp'>Gerenciamento</a></li>");
-        }
-        navSection = navSection.concat(""
-            + "     <li><a href='cadastro_usuario.jsp?edit_user="+user.getLogin()+"'>Editar perfil</a></li>"
-            + "     <li><a href='minhas_receitas.jsp'>Minhas Receitas</a></li>"
-            + "     <li><a href='cadastro_receitas.jsp'>Cadastro de Receitas</a></li>"
-            + "     <li><a href='index.jsp?logout=true'>Sair</a></li>"
-            + " </ul>");
-        
-        mainSection = "<h3>Bem vindo, " + user.getName() + "!</h3>";
-        
-    } else {
-        navSection = ""
-                + " <ul>"
-                + "     <li><a href='login.jsp'>Login</a></li>"
-                + " </ul>";
-        
-        mainSection = "Faça login para continuar";
-    }
-    
-    mainSection = mainSection.concat(Recipe.getCategoryNameGradeTableView());
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,10 +13,40 @@
         </header>
         <div class="page-content">
             <nav>
-                <%=navSection%>
+                <ul>
+                    <c:choose>
+                        <c:when test="${param.login_state='not_logged'}">
+                            <li><a href='login.jsp'>Login</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${param.login_state='admin'}">
+                                <li><a href='gerenciamento.jsp'>Gerenciamento</a></li>
+                            </c:if>
+                            <jsp:useBean id="user" class="beans.User" scope="session" />
+                            <li><a href='cadastro_usuario.jsp?edit_user=${user.login}'>Editar perfil</a></li>
+                            <li><a href='minhas_receitas.jsp'>Minhas Receitas</a></li>
+                            <li><a href='cadastro_receitas.jsp'>Cadastro de Receitas</a></li>
+                            <li><a href='index.jsp?logout=true'>Sair</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
             </nav>
             <section>
-                <%=mainSection%>
+                <jsp:useBean id="recList" class="java.util.List" scope="request" />
+                <table>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Receita</th>
+                        <th>Nota</th>
+                    </tr>
+                    <c:forEach var="r" items="recList">
+                        <tr>
+                            <td><c:out value="${r.category}" /></td>
+                            <td><c:out value="${r.name}"     /></td>
+                            <td><c:out value="${r.grade}"    /></td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </section>
         </div>
     </body>

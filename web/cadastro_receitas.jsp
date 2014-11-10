@@ -1,37 +1,7 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="model.Ingredient" %>
-<%@page import="model.Recipe" %>
-<%@page import="model.User" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<%
-    Recipe rec;
-    User user = (User) session.getAttribute("user");
-    String msg = "";
-    
-    if(user != null && request.getParameter("recipe_name") != null) {
-        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-        
-        int i = 1;
-        do {
-            ingredients.add(new Ingredient(request.getParameter("ingr_name" + i), 
-                                            new Double(request.getParameter("ingr_amnt" + i)),
-                                            request.getParameter("ingr_unt" + i)));
-            
-        } while(request.getParameter("ingr_name" + ++i) != null && !request.getParameter("ingr_name" + 1).equals(""));
-        
-        rec = new Recipe(request.getParameter("recipe_name"),
-                            request.getParameter("recipe_category"),
-                            ingredients,
-                            new Integer(request.getParameter("nutritional_value")),
-                            request.getParameter("tips"),
-                            new Integer(request.getParameter("cooking_time")),
-                            request.getParameter("available").equals("true"));
-        
-        user.addRecipe(rec);
-        msg = "document.onLoad = new function() {alert(\"Receita inserida com sucesso!\")}";
-    }
-%>
 <html>
     <head>
         <title>Cadastro de receitas</title>
@@ -44,7 +14,6 @@
                 list.innerHTML += "<div class='input-line'><input type='text' placeholder='Ingrediente' name='ingr_name"+i+"' class='ing-name' /><input type='number' step='any' placeholder='0' name='ingr_amnt"+i+"' class='ing-amnt' /><select name='ingr_unt"+i+"' class='ing-unt'><option value='Colher'>Colher(es)</option><option value='Xícara'>Xícara(s)</option><option value='Gramas'>Gramas</option><option value='Unidade'>Unidade(s)</option></select></div>";
                 i++;
             }
-            <%=msg%>
         </script>
     </head>
     <body>
@@ -60,7 +29,7 @@
             </ul>
         </nav>
         <div class="page-content">
-            <form action="cadastro_receitas.jsp">
+            <form action="receita.jsp">
                 <div class="input-group">
                     <div class='input-line'>
                         <label for="recipe_name">Nome:</label>
@@ -122,5 +91,10 @@
                 </div>
             </form>	
         </div>
+        <script>
+            <c:if test="${param.recipe_insertion='ok'}">
+                alert("Receita inserida com sucesso!");
+            </c:if>
+        </script>
     </body>
 </html>

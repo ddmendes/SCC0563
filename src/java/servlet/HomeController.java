@@ -6,8 +6,10 @@
 
 package servlet;
 
+import beans.Recipe;
+import beans.User;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,21 +34,28 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
+        User u = (User) request.getSession(true).getAttribute("user");
+        User login = User.getUser(request.getParameter("login"));
+        
+        if(u != null || login != null) {
+            if(u == null && login != null && login.checkPasswd(request.getParameter("passwd"))) {
+                u = login;
+            }
+
+            request.setAttribute("login_state", 
+                        u.getName().equals("Administrador") ? "admin" : "logged"
+                    );
+        } else {
+            request.setAttribute("login_state", "not_logged");
+        }
+        
+        request.setAttribute("recList", Recipe.getRecipeList());
+        request.getRequestDispatcher("home.jsp").forward(request, response);
+    }
+    
+    public void init() throws ServletException {
+        if(User.checkAvailableLogin("adm@receitas.com")) {
+            new User("Administrador", "São Carlos", "SP", "(19)3333-3333", "adm@receitas.com", "12345@Fc");
         }
     }
 
