@@ -4,12 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/src/java/servlet/HomeController.java</file>
-            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/src/java/beans/User.java</file>
-            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/web/detalhe_receita.jsp</file>
-            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/src/java/beans/Ingredient.java</file>
-            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/src/java/servlet/RecipeController.java</file>
-            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/src/java/servlet/UserController.java</file>
-            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/src/java/beans/Recipe.java</file>
+            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/src/java/servlet/LoginController.java</file>
+            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/web/cadastro_usuario.jsp</file>
+            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/web/homeView.jsp</file>
+            <file>file:/C:/Users/DaviDiório/Documents/NetBeansProjects/SCC0563/web/loginView.jsp</file>
         </group>
     </open-files>
 </project-private>

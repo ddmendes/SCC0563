@@ -52,6 +52,46 @@ public class Recipe implements Serializable {
     public String getCategory() {
         return this.category;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setNutritionValue(Integer nutritionValue) {
+        this.nutritionValue = nutritionValue;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
+
+    public void setCookingTime(Integer cookingTime) {
+        this.cookingTime = cookingTime;
+    }
+
+    public void setGrade(Double grade) {
+        this.grade = grade;
+    }
+
+    public void setRateAmount(Integer rateAmount) {
+        this.rateAmount = rateAmount;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setComments(HashMap<User, String> comments) {
+        this.comments = comments;
+    }
     
     public List<Ingredient> getIngredients() {
         return this.ingredients;
@@ -120,8 +160,8 @@ public class Recipe implements Serializable {
         return builder.getProduct();
     }
     
-    public static List<Recipe> getRecipeList() {
-        return (List<Recipe>) recipes.clone();
+    public static ArrayList<Recipe> getRecipeList() {
+        return (ArrayList<Recipe>) recipes.clone();
     }
     
 }

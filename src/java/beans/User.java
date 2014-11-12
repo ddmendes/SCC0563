@@ -21,10 +21,12 @@ public class User implements Serializable{
     private String phone;
     private String login;
     private String passwd;
-    private final HashMap<Recipe, Integer> ratings;
-    private final HashMap<Recipe, String> comments;
-    private final ArrayList<Recipe> recipes;
-    private final static HashMap<String, User> users = new HashMap<String, User>();
+    private HashMap<Recipe, Integer> ratings;
+    private HashMap<Recipe, String> comments;
+    private ArrayList<Recipe> recipes;
+    private static HashMap<String, User> users = new HashMap<String, User>();
+    
+    public User() {}
     
     public User(String name, String city, String state, String phone, String login, String passwd) {
         this.name   = name;

@@ -14,16 +14,17 @@
         <div class="page-content">
             <nav>
                 <ul>
+                    <jsp:useBean id="login_state" class="java.lang.String" scope="request" />
                     <c:choose>
-                        <c:when test="${param.login_state='not_logged'}">
-                            <li><a href='login.jsp'>Login</a></li>
+                        <c:when test="${login_state == 'not_logged'}">
+                            <li><a href='login'>Login</a></li>
                         </c:when>
                         <c:otherwise>
-                            <c:if test="${param.login_state='admin'}">
+                            <c:if test="${login_state == 'admin'}">
                                 <li><a href='gerenciamento.jsp'>Gerenciamento</a></li>
                             </c:if>
                             <jsp:useBean id="user" class="beans.User" scope="session" />
-                            <li><a href='cadastro_usuario.jsp?edit_user=${user.login}'>Editar perfil</a></li>
+                                <li><a href='cadastro_usuario.jsp?edit_user=<jsp:getProperty name="user" property="login" />'>Editar perfil</a></li>
                             <li><a href='minhas_receitas.jsp'>Minhas Receitas</a></li>
                             <li><a href='cadastro_receitas.jsp'>Cadastro de Receitas</a></li>
                             <li><a href='index.jsp?logout=true'>Sair</a></li>
@@ -32,14 +33,14 @@
                 </ul>
             </nav>
             <section>
-                <jsp:useBean id="recList" class="java.util.List" scope="request" />
+                <jsp:useBean id="recList" class="java.util.ArrayList" scope="request" />
                 <table>
                     <tr>
                         <th>Categoria</th>
                         <th>Receita</th>
                         <th>Nota</th>
                     </tr>
-                    <c:forEach var="r" items="recList">
+                    <c:forEach var="r" items="${recList}">
                         <tr>
                             <td><c:out value="${r.category}" /></td>
                             <td><c:out value="${r.name}"     /></td>

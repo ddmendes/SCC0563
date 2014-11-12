@@ -6,10 +6,9 @@
 
 package servlet;
 
+import beans.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DaviDiório
  */
-@WebServlet(name = "UserController", urlPatterns = {"/usuario"})
-public class UserController extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,22 +30,34 @@ public class UserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+        User u = (User) request.getSession(true).getAttribute("user");
+        String login = request.getParameter("login");
+        try{
+            if(!"".equals(login)) {
+                if( request.getParameter("edt_user").equals("") && User.checkAvailableLogin(login) ) {
+                    //Se não é edição de usuário, login está disponível e senha e confirmação conferem.
+                    new User(
+                        request.getParameter("name").toUpperCase(), 
+                        request.getParameter("city").toUpperCase(),
+                        request.getParameter("state"),
+                        request.getParameter("phone"),
+                        login,
+                        request.getParameter("pwd_usuario"));
+                    request.setAttribute("operation_report", "user_inserted");
+                } else if( u != null && u.getLogin().equals(request.getParameter("edt_user")) ) {
+                    u.setName(request.getParameter("name").toUpperCase());
+                    u.setCity(request.getParameter("city").toUpperCase());
+                    u.setState(request.getParameter("state"));
+                    u.setPhone(request.getParameter("phone"));
+                    u.setLogin(login);
+                    u.setPasswd(request.getParameter("actual_passwd"), request.getParameter("pwd_usuario"));
+                    request.setAttribute("operation_report", "user_edited");
+                } else {
+                    request.setAttribute("operation_report", "login_err");
+                }
+            }
+        } catch(NullPointerException ex) {}
+        request.getRequestDispatcher("loginView.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
